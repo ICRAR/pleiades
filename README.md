@@ -1,4 +1,13 @@
-pleiades
-========
+                                           .         .      
+                                        ._ | _ * _. _| _  __
+                                        [_)|(/,|(_](_](/,_) 
+                                        |                   
+													
+           							a data-intensive HPC cluster
 
-Configuration files, code, talks, scripts, for supporting the Pleiades HPC cluster.
+About **pleaides**
+==================
+
+**pleiades** is a data intensive HPC cluster supporting the research and scientific projects for ICRAR.
+
+This repository contains useful documents, talks, configuration files, examples, tutorials, etc to support the cluster.
