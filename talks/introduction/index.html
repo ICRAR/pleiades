@@ -1,0 +1,197 @@
+<!doctype html>  
+<html lang="en">
+    
+    <head>
+        <meta charset="utf-8">
+        
+        <title>Pleiades: A Data-Intensive HPC Cluster</title>
+
+        <meta name="description" content="Pleiades: A Data-Intensive HPC Cluster">
+        <meta name="author" content="ICRAR ICT">
+
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        
+        <link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="css/reset.css">
+        <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="css/print.css" type="text/css" media="print">
+        <link rel="stylesheet" href="lib/icrar.css">
+    </head>
+    
+    <body>
+        
+		<!-- Background image for slide presentation -->
+		<div style="position: relative; top: 0px; left: 0px">
+		<IMG height="100%" src="assets/images/icrar-star-bg.png">
+		</div>
+
+		<!-- Main tag for the 'reveal' slide presentation format -->
+		<div id="reveal">
+
+            <!-- Used to fade in a background when a specific slide state is reached -->
+            <div class="state-background"></div>
+            
+            <!-- Any section element inside of this container is displayed as a slide -->
+            <div class="slides">
+                <section>
+                    <h1>Pleiades</h1>
+                    <h3 class="inverted">A Data-Intensive HPC Cluster</h3>
+                    <script>
+                        // Delicously hacky. Look away.
+                        if( navigator.userAgent.match( /(iPhone|iPad|iPod|Android)/i ) ) document.write( '<p style="color: rgba(0,0,0,0.3); text-shadow: none;">('+'Tap to navigate'+')</p>' );
+                    </script>
+                </section>
+   				<section>
+   					<p><i><small>Located at ICRAR Fairway -- named after the <a href="http://en.wikipedia.org/wiki/Pleiades">Seven Sisters, or Messier object 45 (aka M45)</a>.
+   					<a href="http://dirp01.icrar.org/confluence/display/PLEIADES/ICRAR%27s+Pleiades+HPC+Cluster">
+						<img height="80%" src="assets/images/sdds-pleiades.jpg">
+					</a>
+					</small></i></p>
+				</section>
+				<section>
+				<h2>Pleiades HPC Cluster</h2>
+				<ul>
+					<li>x6 Compute Nodes
+					<li>x1 Head Node
+					<li>x1 Storage Node
+				</ul>
+				</section>
+				<section>
+				<h2>6x Compute Nodes</h2>
+				<ul>
+					<li><b>2x</b> Intel Xeon X5650 2.66GHz <b>6-Core</b> CPUs
+					<li><b>96GB</b> DDR3 ECC RAM
+					<li><b>1x</b> NVIDIA GF100 <b>Tesla C2070</b>
+					<li><b>1x</b> Mellanox QDR Infiniband <b>40Gbps</b> 
+				</ul>
+				</section>
+				<section>
+					<h2>Network Configuration</h2>
+					<a href="http://dirp01.icrar.org/confluence/display/PLEIADES/Node+Configuration">
+						<img height="70%" src="assets/images/icrar-pleiades-topo.png">
+					</a>
+				</section>
+                <section>
+                    <h2>Cluster Status</h2>
+                    <a href="http://pleiades.icrar.org/ganglia">
+                    	<img height="70%" src="http://pleiades.icrar.org/ganglia/graph.php?g=load_report&z=large&c=Pleiades&m=cpu_user&r=hour&s=descending&hc=4&mc=2&st=1337761988">
+                    </a>
+                </section>
+                <section>
+                    <h2>Authentication</h2>
+                    <ul>
+                        <li>Common LDAP User Accounts</li>
+                        <li>Shared-Key Secure Shell</li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>File Systems</h2>
+                    <ul>
+                    	<li><code>/home</code>
+                    	<li><code>/scratch</code>
+                    	<li><code>/mnt/science</code>
+					</ul>
+                </section>
+
+                <section>
+                    <h1>Using Pleiades</h1>
+                    <h2>Submitting Jobs</h2>
+                </section>
+                
+                <section>
+                    <h2>PBS / Torque</h2>
+                    <ul>
+                    	<li>Scheduling System
+                    	<li>Resource Management
+					</ul>
+                </section>
+                
+                <section>
+                    <h2>Cluster Documentation</h2>
+                    <ul>
+                        <li><a href="http://dirp01.icrar.org/confluence/display/PLEIADES/ICRAR%27s+Pleiades+HPC+Cluster">Cluster Overview</a></li>
+                        <li><a href="http://dirp01.icrar.org/confluence/display/PLEIADES/User+Documentation">User Documentation</a></li>
+                        <li><a href="http://dirp01.icrar.org/confluence/pages/viewpage.action?pageId=10650029">Help & Support</a></li>
+                    </ul>
+                </section>
+                
+                <section>
+                    <h2>Questions</h2>
+                    <p>Feel free to contact <a href="http://dirp01.icrar.org/confluence/pages/viewpage.action?pageId=10650029">ICRAR ICT</a> for additional information</p>
+                </section>
+            </div>
+
+            <!-- The navigational controls UI -->
+            <aside class="controls">
+                <a class="left" href="#">&#x25C4;</a>
+                <a class="right" href="#">&#x25BA;</a>
+                <a class="up" href="#">&#x25B2;</a>
+                <a class="down" href="#">&#x25BC;</a>
+            </aside>
+
+            <!-- Displays presentation progress, max value changes via JS to reflect # of slides -->
+            <div class="progress"><span></span></div>
+
+            <!-- ICRAR ICT logo -->
+			<div style="position: absolute; top: 10px; left: 100%; margin-left: -100px">
+			<IMG width="80" src="assets/images/icrar-ict.png">
+			</div>
+			
+        </div>
+
+		<!-- Import the 'reveal' presentation library -->        
+        <script src="js/reveal.js"></script>
+
+        <!-- Import a few optional libraries for code syntax highlighting and classList support in IE9 -->
+        <script src="lib/highlight.js"></script>
+        <script src="lib/classList.js"></script>
+        
+        <script>
+            // Parse the query string into a key/value object
+            var query = {};
+            location.search.replace( /[A-Z0-9]+?=(\w*)/gi, function(a) {
+                query[ a.split( '=' ).shift() ] = a.split( '=' ).pop();
+            } );
+
+            // Fires when a slide with data-state=customevent is activated
+            Reveal.addEventListener( 'customevent', function() {
+                alert( '"customevent" has fired' );
+            } );
+
+            // Fires each time a new slide is activated
+            Reveal.addEventListener( 'slidechanged', function( event ) {
+                // event.indexh & event.indexv
+            } );
+
+            Reveal.initialize({
+                // Display controls in the bottom right corner
+                controls: true,
+
+                // Display a presentation progress bar
+                progress: true,
+
+                // If true; each slide will be pushed to the browser history
+                history: true,
+
+                // Loops the presentation, defaults to false
+                loop: false,
+
+                // Flags if mouse wheel navigation should be enabled
+                mouseWheel: true,
+
+                // Apply a 3D roll to links on hover
+                rollingLinks: true,
+
+                // UI style
+                theme: query.theme || 'default', // default/neon
+
+                // Transition style
+                transition: query.transition || 'default' // default/cube/page/concave/linear(2d)
+            });
+
+            hljs.initHighlightingOnLoad();
+        </script>
+
+    </body>
+</html>
