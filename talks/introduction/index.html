@@ -21,11 +21,6 @@
     
     <body>
         
-		<!-- Background image for slide presentation -->
-		<div style="position: relative; top: 0px; left: 0px">
-		<IMG height="100%" src="assets/images/icrar-star-bg.png">
-		</div>
-
 		<!-- Main tag for the 'reveal' slide presentation format -->
 		<div id="reveal">
 
@@ -43,27 +38,62 @@
                     </script>
                 </section>
    				<section>
-   					<p><i><small>Located at ICRAR Fairway -- named after the <a href="http://en.wikipedia.org/wiki/Pleiades">Seven Sisters, or Messier object 45 (aka M45)</a>.
+   					<p><i><small>Pleiades -- the <a href="http://en.wikipedia.org/wiki/Pleiades">Seven Sisters</a>, or <a href="http://en.wikipedia.org/wiki/Pleiades">Messier object 45 (aka M45)</a>.
    					<a href="http://dirp01.icrar.org/confluence/display/PLEIADES/ICRAR%27s+Pleiades+HPC+Cluster">
 						<img height="80%" src="assets/images/sdds-pleiades.jpg">
 					</a>
-					</small></i></p>
+					</i></small></p>
 				</section>
 				<section>
 				<h2>Pleiades HPC Cluster</h2>
 				<ul>
-					<li>x6 Compute Nodes
-					<li>x1 Head Node
-					<li>x1 Storage Node
+					<li>6x Compute Nodes
+					<li>1x Head Node
+					<li>1x Storage Node
+				</ul>
+				</section>
+   				<section>
+					<p><i><small>Located at <a href="http://www.icrar.org">ICRAR Fairway</a> -- managed by <a href="http://dirp01.icrar.org/confluence">ICRAR ICT</a>
+						<img height="100%" src="assets/images/icrar-pleiades-rack.jpg">
+					</i></small></p>
+				</section>				
+				<section>
+					<section>
+					<h2>6x Compute Nodes</h2>
+					<ul>
+						<li>Number crunching servers
+						<li>Lots of RAM and CPU cores
+						<li>NVIDIA Tesla GPUs (Fermi)						
+					</ul>
+					</section>
+					<section>
+					<h2>Compute Hardware</h2>
+						<ul>
+						<li><b>2x</b> Intel Xeon X5650 2.66GHz <b>6-Core</b> CPUs
+						<li><b>96GB</b> DDR3 ECC RAM
+							<ul>
+								<li>One node:<b>192GB</b> DDR3 ECC RAM
+							</ul>
+						<li><b>1x</b> NVIDIA GF100 <b>Tesla C2070</b>
+						<ul>
+												<li>One node:<b>2x</b> NVIDIA GF100 <b>Tesla C2070</b>
+						</ul>
+						<li><b>1x</b> Mellanox QDR Infiniband <b>40Gbps</b> 
+					</section>						
+				</section>						
+				<section>
+				<h2>1x Head Node</h2>
+				<ul>
+					<li>Access point to the cluster
+					<li>Development and compilation environment
+					<li>Pivot of the scheduling system
 				</ul>
 				</section>
 				<section>
-				<h2>6x Compute Nodes</h2>
+				<h2>1x Storage Node</h2>
 				<ul>
-					<li><b>2x</b> Intel Xeon X5650 2.66GHz <b>6-Core</b> CPUs
-					<li><b>96GB</b> DDR3 ECC RAM
-					<li><b>1x</b> NVIDIA GF100 <b>Tesla C2070</b>
-					<li><b>1x</b> Mellanox QDR Infiniband <b>40Gbps</b> 
+					<li>Reliable Storage for <code>/home</code>
+					<li>Shared with other ICRAR systems
 				</ul>
 				</section>
 				<section>
@@ -82,16 +112,41 @@
                     <h2>Authentication</h2>
                     <ul>
                         <li>Common LDAP User Accounts</li>
-                        <li>Shared-Key Secure Shell</li>
+                        <li>Public-Key Secure Shell Access</li>
+                    </ul>
+                </section>
+                <section>
+					<h2>Common LDAP User Accounts</h2>
+					<ul>
+						<li>Same account as dirp01
+						<li>Accounts already exists, no need to ask for creation
+						<li>Access to the scheduling queue <b>MUST BE</b> requested
+					</ul>
+				</section>
+                <section>
+					<h2>Public-Key Access</h2>
+					<ul>
+						<li>Available throughout the cluster</li>
+						<li>Key pairs to be generated during first use
+						<li>Torque/PBS relies on SSH keys
                     </ul>
                 </section>
                 <section>
                     <h2>File Systems</h2>
                     <ul>
                     	<li><code>/home</code>
+						<ul>
+							<li>NFS4 share on top of a RAID6 device (<em>quota enforced</em>)
+						</ul>
                     	<li><code>/scratch</code>
+						<ul>
+							<li>High performance filesystem as a staging area (<em>no HA</em>)
+						</ul>
                     	<li><code>/mnt/science</code>
-					</ul>
+						<ul>
+							<li>NFS4 already in use on dirp01 (<em>no HA</em>)
+						</ul>
+                   </ul>
                 </section>
 
                 <section>
@@ -100,13 +155,71 @@
                 </section>
                 
                 <section>
-                    <h2>PBS / Torque</h2>
+                    <h2>Resource Management</h2>
                     <ul>
                     	<li>Scheduling System
-                    	<li>Resource Management
+                    	<li>Manages Jobs
+                    	<li>Allocates Resources
 					</ul>
+	        	</ul>
                 </section>
-                
+                <section>
+					<h2>PBS / Torque</h2>
+		    		<h4>Queue allocation based on requested resources</h4>
+					<img width="100%" src="assets/images/icrar-pleiades-queues.png">
+					<small><b>More CPU cores means less walltime</b></small>
+                </section>
+
+                <section>
+                    <h2>Job Script</h2>
+					<pre><code contenteditable>
+#PBS -l nodes=1:ppn=1
+#PBS -o hello_echo.out
+#PBS -e hello_echo.err
+/bin/echo "HELLO! from $HOSTNAME!"
+					</code></pre>
+                    <p><pre>hello_echo.pbs</pre></p>
+					<code>
+					</code>
+                </section>
+
+                <section>
+                    <h2>Job Submission</h2>
+					<pre><code contenteditable>
+[me@pleiades ~]$ qsub hello_echo.pbs
+1234.pleiades.icrar.org
+					</code></pre>
+                    <p><pre>submit hello_echo.pbs</pre></p>
+					<code>
+					</code>
+                </section>
+
+                <section>
+                    <h2>Job Output</h2>
+					<pre><code contenteditable>
+[me@pleiades ~]$ cat hello_echo.out
+HELLO from pleiades01.icrar.org!
+					</code></pre>
+                    <p><pre>cat hello_echo.out</pre></p>
+                </section>
+                <section>
+                    <h2>Resource Requests</h2>
+					<pre><code contenteditable>
+[me@pleiades ~]$ qsub -l nodes=6:ppn=12 sleep.pbs
+1024.pleiades.icrar.org
+					</code></pre>
+                    <p><pre>run on 6 nodes with 12 processes per node</pre></p>
+                </section>
+                <section>
+                    <h2>Job Monitoring</h2>
+					<pre><code contenteditable>
+[me@pleiades ~]$ qstat
+Job id                    Name             User            Time Use S Queue
+------------------------- ---------------- --------------- -------- - -----
+1024.pleiades              sleep.pbs        me                    0 Q large
+					</code></pre>
+                    <p><pre>job was routed to the large queue and is pending</pre></p>
+                </section>
                 <section>
                     <h2>Cluster Documentation</h2>
                     <ul>
@@ -120,6 +233,7 @@
                     <h2>Questions</h2>
                     <p>Feel free to contact <a href="http://dirp01.icrar.org/confluence/pages/viewpage.action?pageId=10650029">ICRAR ICT</a> for additional information</p>
                 </section>
+
             </div>
 
             <!-- The navigational controls UI -->
